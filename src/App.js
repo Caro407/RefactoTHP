@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Avatar, Button, Card, Col, Icon, Row, Modal, List, Tag, Input, message } from 'antd/es';
 import MentionsTagsComponent from './MentionsTagsComponent';
+import AppBis from './appBis'
 
 class App extends Component {
   constructor() {
@@ -106,6 +107,7 @@ class App extends Component {
   render() {
     return (
       <div style={{ margin: 50 }}>
+        <AppBis />
         <Modal width={520} visible={this.state.previewPublicationModal} onCancel={() => this.setState({ previewPublicationModal: false })}
           footer={<Row type="flex">
             <Col span={12} className="text-center">
@@ -188,65 +190,6 @@ class App extends Component {
             </Col>
           </Row>
         </Modal>
-        <Row type="flex" align="middle" justify="center">
-          <Col sm={16} xs={24}>
-            <Card bordered>
-              <Row type="flex" align="middle" justify="center">
-                <Col md={14} sm={16} xs={24}>
-                  <Row type="flex" justify="space-between">
-                    <Col span={10} className="text-center">
-                      <Avatar size={100} icon="user" className="profil-pic" src={this.state.profileData.profilePicture} />
-                      <h3>{`${this.state.profileData.firstname} ${this.state.profileData.lastname}`}</h3>
-                    </Col>
-                    <Col span={10}>
-                      <p>
-                        <Icon type="user" className="p-icon" />
-                        {this.state.profileData.username}
-                      </p>
-                      <p>
-                        <Icon type="mail" className="p-icon" />
-                        {this.state.profileData.email}
-                      </p>
-                      <p>
-                        <Icon type="phone" className="p-icon" />
-                        {this.state.profileData.phoneNumber}
-                      </p>
-                      <p>
-                        <Icon type="calendar" className="p-icon" />
-                        {this.formatDate(this.state.profileData.createdAt)}
-                      </p>
-                    </Col>
-                  </Row>
-                </Col>
-                <Col md={10} sm={16} xs={24} className="text-center">
-                  <Button type="ghost" icon="setting" onClick={() => this.setState({ editProfilModal: true })}>Edit account</Button>
-                  <br />
-                  <br />
-                  <Button type="ghost" icon="upload" onClick={() => this.setState({ uploadModal: true })}>Upload a picture</Button>
-                </Col>
-              </Row>
-            </Card>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center">
-          <Col sm={18} xs={24}>
-            <Col span={24} className="container text-center">
-              <h2>
-                <Icon type="save" />
-                <span className="span-icon">Publications</span>
-              </h2>
-              <Card bordered className="card-pubs" onClick={() => this.openPreview(0)}>
-                <img src={this.state.profileData.posts[0].imageUrl} width={200} height={200} alt={this.state.profileData.posts[0].imageUrl} />
-              </Card>
-              <Card bordered className="card-pubs" onClick={() => this.openPreview(1)}>
-                <img src={this.state.profileData.posts[1].imageUrl} width={200} height={200} alt={this.state.profileData.posts[1].imageUrl} />
-              </Card>
-              <Card bordered className="card-pubs" onClick={() => this.openPreview(2)}>
-                <img src={this.state.profileData.posts[2].imageUrl} width={200} height={200} alt={this.state.profileData.posts[2].imageUrl} />
-              </Card>
-            </Col>
-          </Col>
-        </Row>
       </div>
     )
   }
