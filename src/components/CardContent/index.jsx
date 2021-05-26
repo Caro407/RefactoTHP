@@ -1,8 +1,15 @@
 import React from 'react';
-import { Avatar, Button, Card, Col, Icon, Row, Modal, List, Tag, Input, message } from 'antd/es';
+import { Avatar, Button, Col, Icon, Row } from 'antd/es';
 import infos from './../../data/infos';
 
-const CardContent = () => {
+const CardContent = (props) => {
+  const openEditModal = () => {
+    props.openEditModal();
+  };
+
+  const openUploadModal = () => {
+    props.openUploadModal();
+  };
 
   return (
     <Row type="flex" align="middle" justify="center">
@@ -33,10 +40,10 @@ const CardContent = () => {
         </Row>
       </Col>
       <Col md={10} sm={16} xs={24} className="text-center">
-        <Button type="ghost" icon="setting">Edit account</Button>
+        <Button type="ghost" icon="setting" onClick={openEditModal}>Edit account</Button>
         <br />
         <br />
-        <Button type="ghost" icon="upload">Upload a picture</Button>
+        <Button type="ghost" icon="upload" onClick={openUploadModal}>Upload a picture</Button>
       </Col>
     </Row>
   )

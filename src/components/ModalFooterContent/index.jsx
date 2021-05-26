@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Col, Row } from 'antd/es';
 
-const ModalFooterContent = () => {
+const ModalFooterContent = (props) => {
   const updatePic = () => {
-    alert("J'update la publication avec l'id : " + 'this.state.profileData.posts[this.state.previewItem].id');
+    alert("J'update la publication avec l'id : " + props.data.id);
   };
 
   const deletePic = () => {
-    alert("Je supprime la publication avec l'id : " + 'this.state.profileData.posts[this.state.previewItem].id');
+    alert("Je supprime la publication avec l'id : " + props.data.id);
   };
 
 return (

@@ -1,7 +1,6 @@
 // Kata written by Matthieu BRAULT for the next-react formation from TheHackingProject
 import React, { Component } from 'react';
-import { Avatar, Button, Card, Col, Icon, Row, Modal, List, Tag, Input, message } from 'antd/es';
-import MentionsTagsComponent from './MentionsTagsComponent';
+import { Col, Row, Modal, Input, message } from 'antd/es';
 import AppBis from './appBis'
 
 class App extends Component {
@@ -54,11 +53,7 @@ class App extends Component {
       }
     }
     this.formatDate = this.formatDate.bind(this);
-    this.deletePic = this.deletePic.bind(this);
-    this.updatePic = this.updatePic.bind(this);
     this.uploadPicture = this.uploadPicture.bind(this);
-    this.updateHashtags = this.updateHashtags.bind(this);
-    this.updateMentions = this.updateMentions.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
   }
 
@@ -67,31 +62,8 @@ class App extends Component {
     return `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
   }
 
-  openPreview(postNumber) {
-    this.setState({
-      previewItem: postNumber,
-      previewPublicationModal: true,
-    });
-  }
-
-  updatePic() {
-    alert("J'update la publcation avec l'id : " + this.state.profileData.posts[this.state.previewItem].id);
-  }
-
-  deletePic() {
-    alert("Je supprime la publcation avec l'id : " + this.state.profileData.posts[this.state.previewItem].id);
-  }
-
   uploadPicture() {
     alert("J'upload une image avec la description : " + this.state.description + " et les hashtags " + this.state.hashtags + " et les mentions " + this.state.mentions);
-  }
-
-  updateMentions(value) {
-    this.setState({ mentions: value });
-  }
-
-  updateHashtags(value) {
-    this.setState({ hashtags: value })
   }
 
   updateProfile() {
@@ -108,52 +80,6 @@ class App extends Component {
     return (
       <div style={{ margin: 50 }}>
         <AppBis />
-        <Modal width={520} visible={this.state.previewPublicationModal} onCancel={() => this.setState({ previewPublicationModal: false })}
-          footer={<Row type="flex">
-            <Col span={12} className="text-center">
-              <Button type="ghost" icon="edit" onClick={this.updatePic}>Edit</Button>
-            </Col>
-            <Col span={12} className="text-center">
-              <Button type="danger" icon="delete" onClick={this.deletePic}>Delete</Button>
-            </Col>
-          </Row>}
-        >
-          <Row type="flex" align="middle">
-            <Col xs={24} md={12} className="text-center">
-              <img src={this.state.profileData.posts[this.state.previewItem].imageUrl} width={200} height={200} alt={this.state.profileData.posts[this.state.previewItem].description} />
-            </Col>
-            <Col xs={24} md={12}>
-              <div>
-                <b>Description: </b>
-                <p>{this.state.profileData.posts[this.state.previewItem].description}</p>
-              </div>
-              <div>
-                <b>Hashtag:</b>
-                <List
-                  grid={{ gutter: 16, column: 2 }}
-                  dataSource={this.state.profileData.posts[this.state.previewItem].hashtags}
-                  renderItem={(tag) => (
-                    <List.Item>
-                      <Tag>{`${tag}`}</Tag>
-                    </List.Item>
-                  )}
-                />
-              </div>
-              <div>
-                <b>Mention:</b>
-                <List
-                  grid={{ gutter: 16, column: 2 }}
-                  dataSource={this.state.profileData.posts[this.state.previewItem].mentions}
-                  renderItem={(user) => (
-                    <List.Item>
-                      <Tag>{`@${user}`}</Tag>
-                    </List.Item>
-                  )}
-                />
-              </div>
-            </Col>
-          </Row>
-        </Modal>
         <Modal title="Upload a picture" okText="Upload" visible={this.state.uploadModal} onOk={this.uploadPicture} onCancel={() => this.setState({ uploadModal: false })}>
           <Row type="flex" justify="center" className="input-container">
             <Col span={20}>
@@ -161,8 +87,6 @@ class App extends Component {
               <Input id="description" title="Description" type="text" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
             </Col>
           </Row>
-          <MentionsTagsComponent type="mentions" value={this.state.mentions} title="Mention a user" setValue={this.updateMentions} />
-          <MentionsTagsComponent type="tags" value={this.state.hashtags} title="Hashtags" setValue={this.updateHashtags} />
         </Modal>
         <Modal title="Edit your account" okText="Update" visible={this.state.editProfilModal} onOk={this.updateProfile} onCancel={() => this.setState({ editProfilModal: false })}>
           <Row type="flex" justify="center" className="input-container">

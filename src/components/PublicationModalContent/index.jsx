@@ -1,7 +1,7 @@
 import React from 'react';
-import { Col, Row, List, Tag, message } from 'antd/es';
+import { Col, Row, List, Tag } from 'antd/es';
 
-const ModalContent = (props) => {
+const PublicationModalContent = (props) => {
 
   return (
     <Row type="flex" align="middle">
@@ -42,4 +42,4 @@ const ModalContent = (props) => {
   )
 };
 
-export default ModalContent;
+export default PublicationModalContent;
